@@ -1,0 +1,10 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "event_handlers",
+        "options",
+        "lsp",
+        "opts",
+        "dapui"
+    ]
+}
