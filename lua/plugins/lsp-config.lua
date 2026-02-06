@@ -30,7 +30,7 @@ return {
         "neovim/nvim-lspconfig",
         lazy = false,
         config = function()
-            local lspconfig = require("lspconfig")
+            local lspconfig = require('lspconfig')
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
             vim.diagnostic.config({
@@ -40,34 +40,76 @@ return {
                 update_in_insert = true,
                 severity_sort = true,
             })
-            lspconfig.clangd.setup({
+            vim.lsp.config['clangd'] = {
                 capabilities = capabilities,
-                cmd = {
-                    "clangd",
-                    "--compile-commands-dir=build",
-                    "--query-driver=/usr/bin/g++,/usr/bin/clang++"
+            --     cmd = {
+            --         "clangd",
+            --         "--compile-commands-dir=build",
+            --         "--query-driver=/usr/bin/g++,/usr/bin/clang++"
+            --     },
+            }
+            vim.lsp.config['taplo'] = {
+                capabilities = capabilities
+            }
+            vim.lsp.config['lua_ls'] = {
+                capabilities = capabilities
+            }
+            vim.lsp.config['cssls'] = {
+                capabilities = capabilities
+            }
+            vim.lsp.config['marksman'] = {
+                capabilities = capabilities
+            }
+            vim.lsp.config['kotlin_language_server'] = {
+                capabilities = capabilities
+            }
+            vim.lsp.config['verible'] = {
+                capabilities = capabilities
+            }
+            -- vim.lsp.config['clangd'] = {
+            --     cmd = { "clangd", "--compile-commands-dir=." },
+            --     root_dir = function(fname)
+            --         return require('lspconfig.util').root_pattern('compile_commands.json')(fname)
+            --             or vim.fn.getcwd()
+            --     end,
+            -- }
+            vim.lsp.config['pylsp'] = {
+                on_attach = custom_attach,
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            -- formatter options
+                            black = { enabled = true },
+                            autopep8 = { enabled = false },
+                            yapf = { enabled = false },
+                            -- linter options
+                            pylint = { enabled = true, executable = "pylint" },
+                            pyflakes = { enabled = false },
+                            pycodestyle = { enabled = false },
+                            -- type checker
+                            pylsp_mypy = { enabled = true },
+                            -- auto-completion options
+                            jedi_completion = { fuzzy = true },
+                            -- import sorting
+                            pyls_isort = { enabled = true },
+                        },
+                    },
                 },
-            })
-            lspconfig.taplo.setup({
-                capabilities = capabilities
-            })
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities
-            })
-            lspconfig.pylsp.setup({
-                capabilities = capabilities
-            })
-            lspconfig.cssls.setup({
-                capabilities = capabilities
-            })
-            lspconfig.marksman.setup({
-                capabilities = capabilities
-            })
-            lspconfig.kotlin_language_server.setup({
-                capabilities = capabilities
-            })
-            lspconfig.verible.setup({
-                capabilities = capabilities
+                flags = {
+                    debounce_text_changes = 200,
+                },
+                capabilities = capabilities,
+
+            }
+            vim.lsp.enable({
+                "clangd",
+                "pylsp",
+                "verible",
+                "taplo",
+                "lua_ls",
+                "cssls",
+                "marksman",
+                "kotlin_language_server"
             })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, {})
