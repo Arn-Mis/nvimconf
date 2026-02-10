@@ -10,7 +10,6 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = { "clangd",
-                    "cmake",
                     "gradle_ls",
                     "lua_ls",
                     "html",
