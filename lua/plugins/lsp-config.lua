@@ -41,11 +41,11 @@ return {
             })
             vim.lsp.config['clangd'] = {
                 capabilities = capabilities,
-            --     cmd = {
-            --         "clangd",
-            --         "--compile-commands-dir=build",
-            --         "--query-driver=/usr/bin/g++,/usr/bin/clang++"
-            --     },
+                cmd = {
+                    "clangd",
+                    "--compile-commands-dir=build",
+                    "--query-driver=/usr/bin/g++,/usr/bin/clang++"
+                },
             }
             vim.lsp.config['taplo'] = {
                 capabilities = capabilities
@@ -66,7 +66,7 @@ return {
                 capabilities = capabilities
             }
             -- vim.lsp.config['clangd'] = {
-            --     cmd = { "clangd", "--compile-commands-dir=." },
+            --     cmd = { "clangd", "--compile-commands-dir=./build" },
             --     root_dir = function(fname)
             --         return require('lspconfig.util').root_pattern('compile_commands.json')(fname)
             --             or vim.fn.getcwd()
