@@ -12,6 +12,7 @@ vim.keymap.set('n', '<C-l>', ':Lazy<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>tt', ':lua Snacks.terminal.toggle()<Cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader>vs', ':vsplit<Cr>', {noremap = true, silent = true})
 vim.keymap.set('n' , '<Leader>hs', ':split<Cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<Leader>ww', ':set wrap!<Cr>', {noremap = true, silent = true})
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -40,3 +41,8 @@ local autoCommands = {
 }
 
 M.nvim_create_augroups(autoCommands)
+
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
